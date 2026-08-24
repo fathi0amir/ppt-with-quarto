@@ -1,0 +1,32 @@
+---
+config:
+  layout: elk
+  flowchart:
+    curve: basis
+id: eaba3547-fcc5-4595-ae35-a54633b18ec6
+---
+flowchart LR
+    subgraph prep [Preprocessing]
+        direction TB
+        A0@{ shape: start, label: "" } --> A["Fit MSD"] --> B["Plot the D/ɑ distribution"]
+    end
+
+    subgraph analysis [Distribution analysis]
+        direction TB
+        C{"Is the distribution distinctly bimodal?"}
+        C -- Yes --> D["Threshold"]
+        C -- No --> E["Fit with two Gaussians and score"]
+    end
+
+    subgraph raster [Rasterization and output]
+        direction TB
+        G["Count the points that fall in a pixel"]
+        H["Sum the score of each point in a pixel"]
+        G --> J["Map color to intensity"]
+        H --> J
+        J --> K["Threshold the rasterized image"]
+        K --> L["End"]
+    end
+
+    prep --> analysis --> raster
+    L@{ shape: summary, label: "" }

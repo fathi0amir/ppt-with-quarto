@@ -1,0 +1,193 @@
+---
+title: "Weekly Report"
+subtitle: "2026/08/24"
+author: "Amir Fathi"
+
+format:
+  pptx:
+    reference-doc: template.pptx
+    filters: 
+      - math-to-png.lua
+
+# Optional math filter configuration (all keys are optional):
+math-config:
+  format: svg          # "svg" (default, needs xelatex+dvisvgm) or "png" (pdflatex+ghostscript)
+  font-size: 20        # display-math typeset size in pt
+  use-cache: true      # reuse rendered math images across renders
+  inline-style: italic # inline math as italic text ("italic" | "normal")
+
+---
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Highlights                                                   │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Highlights
+
+- Highlights of this week:
+  - Laser induced peptide fibrillation experiment with fs-laser
+  - iSCAT-Confocal colocalization for 25% BMP with DOPE-Biotin and DOPE-Cy5.
+    I have finished measurement for two samples. 
+    However, in my samples in the LSCM images I wasn't able to find any domain formation. 
+    I could track GNPs in these two samples though, and I will analyze the data next week.
+    - testing the indentation 
+  - More single molecule emission investigation
+  - Investigating the source of vibration in the iSCAT system
+  - Better LSCM-iSCAT image calibration
+- Next: 
+  - Do SPT with iSCAT for BMP 50% + TAT with higher concentration
+  - Analyze the iSCAT data
+  - Test the idea with fringe suppression with z axes modulation
+  - As *in* domains show more confinement, find a way to quantify the confinement using gyration tensor, 
+  ergodicity analysis, transient confinement analysis, and other metrics
+  - Do more experiments for phase separation
+  - Find a way to calibrate confocal image with the iSCAT image
+  - More simulation for the random phase mask to find the optimal parameters for the diffuser
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Laser Induced Peptide Fibrillation Experiment
+
+I used fs-laser at its maximum power to induce peptide fibrillation. I tried 
+to scan a small ROI or even a single point for maximum of 4 minutes. We tried to 
+at the substrate and buffer interface, in the bulk buffer and at the buffer-air interface. 
+We didn't observe new TAT nucleation or fibrillation in all three cases. 
+Furthermore, we have also tried two different TAT concentration (low and high). I am doing some 
+literature search to see if I can find some criteria for the experimental 
+parameters, such laser power, exposure time, TAT concentration and focusing position to 
+induce initiate nucleation, droplets or fibrillation. 
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## iSCAT Noise Source
+
+I have recorded the vibration with the iSCAT system (PhotonFocus camera) to compare 
+with the recording with my phone of beam visible vibrations. There is a clear 
+20 Hz frequency in the image. I did try to find the source but so far I was not 
+able to find where the 20 Hz frequency is coming from. I have some new ideas that 
+I will try next week to find the source of the vibration.
+
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\iscat-vibration.png)
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## LSCM-iSCAT Image Calibration
+
+I cleaned a substrate and scratch it with a diamond tip. I dropped dilute solution of Cy5 
+where the dye molecules will stick to the scratches. Furthermore, I then imaged the sample with confocal and iSCAT.
+I then used the scratches as fiducial markers to calibrate the confocal image with the iSCAT image. 
+I can see the emission from the Cy5 molecules in the LSCM image and the scattering from the scratches in the iSCAT image.
+The images are higher correlated and with slight adjustment on steering mirror to the iSCAT camera, 
+I can find the position that matched the one in LSCM image. 
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\lscm-iscat-calib.png)
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Single / Aggregate Emitter Multistep Photobleaching Analysis
+
+::: {.columns}
+
+::: {.column width="65%"}
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\multistep-analysis.png)
+
+:::
+
+::: {.column width="35%"}
+
+I have analyzed another two samples to check for the multistep photobleaching. 
+There are some tracks that show multistep photobleaching but typically compare to the 
+number of tracks there are only less than 4% of the tracks that show multistep photobleaching.
+This indicates that the majority of the tracks are from single emitters. Left: 25% BMP with TAT-R - 2026-07-08
+Right: 50% BMP with TAT 2026-06-10. 
+
+:::
+
+:::
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Single Molecule Emitter Validation
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\step-histogram.png)
+
+:::
+
+
+::: {.column width="50%"}
+
+The histogram of the photobleaching step distribution for the same two samples. 
+
+:::
+
+:::
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Meeting Summary                                              │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Meeting Summary
+
+### Paul
+- The time dependent for SLB with 25% BMP for 0.5, 1, 2, and 4 hours after TAT addition was repeated. 
+- TAT variant with 7+ positive charges was also tested and will be analyzed and reported next week.
+
+### Tony 
+- …
+
+### Peggy
+- Consistent staining (close to 100%) for the LNPs was confirmed. 
+- Size exclusion experiment was also repeated with consistent results for G1 and G5. 
+
+### Andrew
+- There are some inconsistencies in the temperature dependent data. In one area when
+rising the temperature from room temperature to 50°C the domain disappears and 
+doesn't reappear when cooling down to room temperature. In another area, the domain (observed at RT) disappears at 50°C 
+but another domain appears. And when cooling down to RT the domain at 50°C disappears and another new 
+domain appears. 
+- Tracking this data set has only few successful tracks. New dataset is being measured and will be 
+analyzed.
+
+<!-- ### Daniel
+- I have discussed the experiment with Daniel to use fs-laser to induce peptide elongation which will 
+be carried out on Monday. 
+  - We can use small ROI (smaller than the confocal FOV) to induce elongation then compare that ROI with the rest of the FOV to see if there is any difference. 
+
+### Rui
+- Rui seems busy with the manuscript but later on we will try to try to do experiment on SLBs and 
+see if fs-laser can induce phase separation or assist in domain formation. 
+  - One thing we can try is to use fs-laser to create defects and test the idea that TAT peptides 
+  tend to accumulate in the defects as in the AFM and dSTORM images. -->
+

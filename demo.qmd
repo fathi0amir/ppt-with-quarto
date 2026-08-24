@@ -1,0 +1,172 @@
+---
+title: "Weekly Report"
+subtitle: "2026/08/10"
+author: "Amir Fathi"
+
+format:
+  pptx:
+    reference-doc: template.pptx
+    filters: 
+      - math-to-png.lua
+
+# Optional math filter configuration (all keys are optional):
+math-config:
+  format: svg          # "svg" (default, needs xelatex+dvisvgm) or "png" (pdflatex+ghostscript)
+  font-size: 20        # display-math typeset size in pt
+  use-cache: true      # reuse rendered math images across renders
+  inline-style: italic # inline math as italic text ("italic" | "normal")
+
+---
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Highlights                                                   │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Highlights
+
+- Highlights of this week:
+  - iSCAT-Confocal colocalization for 50% BMP with DOPE-Biotin and DOPE-Cy5 (unsuccessful)
+  - Prepared new batch of SUV for 25% BMP with DOPE-Biotin and DOPE-Cy5 markers
+  - Single molecule emitter validation
+- Next: 
+  - Validate the single molecule emitter for other data sets with multistep fitting. 
+  - Do SPT with iSCAT for BMP 25% + TAT
+  - As *in* domains show more confinement, find a way to quantify the confinement using gyration tensor, 
+  ergodicity analysis, transient confinement analysis, and other metrics
+  - Do more experiments for phase separation
+  - Find a way to calibrate confocal image with the iSCAT image
+  - More simulation for the random phase mask to find the optimal parameters for the diffuser
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## 50% BMP with DOPE-Biotin and DOPE-Cy5
+
+I prepared two SLB samples. In both sample I can see the membrane (not its
+fluidity) in the confocal image (DOPE-Cy5 channel). However, When I switch to
+iSCAT acquisition, I can only see stationary GNPs (not undergoing Brownian
+motion). I tried different regions of the sample, but I couldn't find any mobile
+GNPs. Therefore, I prepared a new batch of SUV for 25% BMP with DOPE-Biotin and
+DOPE-Cy5 markers which has a better chance of success when preparing the SLB
+sample.
+
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Single Molecule Emitter Validation (Single Step Fitting)
+
+
+The histogram shows
+a unimodal distribution, it is likely that the signal is from a single molecule.
+In the figure above, the histogram show single-emitter step size (ΔI) 306±158.
+a.u. Here, I filtered more than 7000 trajectories and found 167 trajectories
+that shows clear signal drops. I have tested this on sample with TAT-B with 25%
+BMP. Please note that
+the analysis was done on the sum of all pixels designated to
+a particle that trackpy reports. 
+
+| Metric | Value |
+| :--- | :--- |
+| Total trajectories in dataset | 7,747 |
+| Trajectories $\ge$ 15 frames analyzed | 7,747 |
+| Qualifying single-step bleach events | 163 (2.1% of analyzed) |
+| Average single-molecule step size ($\Delta I$) | $306.98 \pm 158.53$ |
+| Average background noise level ($\sigma$) | $56.86 \pm 39.64$ |
+| Average Step Signal-to-Noise Ratio | 7.06 |
+
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Single Molecule Emitter Validation (Multistep Fitting)
+
+::: {.columns}
+
+::: {.column width="65%"}
+
+![](media/multi-step.png)
+
+:::
+
+::: {.column width="35%"}
+
+Although the histogram when only searching for single-step bleach events shows a unimodal distribution, when I can find many trajectories that show multiple bleach events.
+
+Total trajectories in dataset: 7747 \
+Trajectories >= 15 frames analyzed: 7747 \
+Qualifying stepwise bleaching tracks: 187 (2.4% of analyzed) \
+1-step class (Monomer): 89 tracks (47.6%)\
+2-step class (Dimer): 88 tracks (47.1%) \
+3-step class (Trimer/Aggregate): 7 tracks (3.7%) \
+4-step class (Trimer/Aggregate): 2 tracks (1.1%) \
+5-step class (Trimer/Aggregate): 1 tracks (0.5%) \
+
+:::
+
+:::
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Single Molecule Emitter Validation (Histogram)
+
+I also tried to plot the histogram of the signal intensity for all trajectories at 
+different time points. The histogram shows a unimodal distribution, but they could be from multiple emitters. Therefore, I think the multistep fitting is a better way to validate the single molecule emitter.
+
+![](media/signal-hist.png)
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Inline and display math
+
+This is inline math: $mv^2+\alpha\times\beta^3$, embedded right in a sentence.
+
+Note: pandoc's PPTX writer starts a new slide after an image, so put display
+math at the end of a slide — one display equation per slide.
+
+Subscript and Superscript: $x_1^2 + x_2^2 = x_3^2$.
+
+A display equation (kept as the last block of this slide):
+
+$$
+\int_{a}^{b} f(x)\,dx = F(b) - F(a)
+$$
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Meeting Summary                                              │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Meeting Summary
+
+### Paul
+- The fitting for TAT affinity is improved for better fitting and better visualization. 
+- Time dependent images for SPT analysis is done for 0, 1, 2, 3, 4 and 5 hours after TAT addition.
+
+### Tony 
+- ...
+
+### Peggy
+- Based on the concentration dependence of LNPs the next round of experiments will be 
+done with 10x higher concentration.
+
+### Andrew
+- Temperature dependent experiment shows that domains 
+formed after TAT addition disappear at 50 °C. However, when the sample is cooled down
+to room temperature, the domains do not reappear.
+- Next is to analyze the SPT for DOPE-Atto488 and Cholesterol-Bodipy to see 
+if the diffusion coefficient is different for the two markers. 
+

@@ -1,0 +1,90 @@
+# =====================================================================
+# Quarto -> PowerPoint style configuration
+#
+# Single source of truth for style_template.py.
+# Any key can be omitted; the script falls back to sensible defaults.
+# Hex colors are 6-digit RGB without '#', e.g. "1F3864".
+# Percentages are 0-100 of the slide dimension.
+# =====================================================================
+
+# --- Slide dimensions -------------------------------------------------
+# ratio presets: "16:9" | "16:10" | "4:3"
+#   or specify a custom size in inches with `width` + `height`.
+slide:
+  ratio: "4:3"          # Quarto's default reference doc is 16:9
+  # width: 10.0         # inches (only used with custom size)
+  # height: 7.5         # inches
+
+# --- Fonts --------------------------------------------------------------
+font:
+  name: "Candara"        # body + UI font (theme minor font)
+  title_name: "Candara"  # title font (theme major font); defaults to name
+  mono: "Consolas"       # code font (applied to rendered decks, patch step)
+  title_size: 28         # pt
+  subtitle_size: 20      # pt (author/date on the title slide)
+  body_size: 18          # pt
+  code_size: 12          # pt (applied to code runs in rendered decks)
+  # Optional per-level body sizes (9 levels). Unset => all levels = body_size.
+  # level_sizes: [18, 16, 14, 13, 12, 11, 10, 10, 10]
+
+# --- Colors ---------------------------------------------------------------
+colors:
+  title_text: "1F3864"   # title text color
+  title_fill: "ADD8E6"   # title placeholder background; "" = no fill
+  body_text: "262626"    # body text color
+  background: ""         # slide background; "" = keep template default
+  # Theme accent colors (only applied to keys you set; unset keeps template):
+  accent1: ""
+  accent2: ""
+  accent3: ""
+  accent4: ""
+  accent5: ""
+  accent6: ""
+  link: ""               # hyperlink color
+
+# --- Layout ------------------------------------------------------------------
+layout:
+  title_align: "ctr"        # title alignment: "l" | "ctr" | "r"
+  subtitle_align: "ctr"     # author/date on the title slide: "l" | "ctr" | "r"
+  body_align: "l"           # body alignment: "l" | "ctr" | "r" | "just"
+  title_bold: false
+  body_bold: false
+  vertical_anchor: "ctr"    # "t" | "ctr" | "b" for title + body placeholders
+  autofit: false            # normAutofit on template placeholders (deck patching is more reliable)
+  # Text-frame insets in inches:
+  insets:
+    left: 0.10
+    right: 0.10
+    top: 0.05
+    bottom: 0.05
+  line_spacing: 1.0         # multiplier for body paragraphs
+  space_after: 4            # pt after body paragraphs
+  body_indent: 0.37         # inches; bullet indent for body paragraphs
+  footer_bottom_margin: 1.5 # % of slide height: distance of footer row from bottom edge
+  content_gap: 1.0          # % of slide height: gap between body content and footer row
+  caption_ratio: 0.28       # Content with Caption layout: fraction of body height for caption
+  expand_body_to_footer: true  # extend body placeholders down to the footer row
+                               # (set false if geometry_overrides give exact heights)
+  # Optional explicit placeholder geometry (percent of slide).
+  # "title" applies to title + ctrTitle placeholders, "body" to body + subTitle.
+  # Center-title placeholders are always horizontally centered.
+  # geometry_overrides:
+  #   title: {x: 3.75, y: 10, w: 92.5, h: 12}
+  #   body:  {x: 3.75, y: 20, w: 92.5, h: 70}
+
+# --- Tables ---------------------------------------------------------------
+# "simple" = white cells with thin dark grid lines, no banding, no header
+#            emphasis (installed into the template + applied when patching)
+# "default" = pandoc's default blue "Medium Style 2 - Accent 1" look
+# table:
+#   style: "simple"
+
+# --- Patching rendered decks (quarto render + patch step) ---------------------
+patch:
+  autofit: true            # force word-wrap + shrink-text-on-overflow on all text frames
+  apply_insets: true       # apply layout.insets to all text frames
+  normalize_indents: true  # rewrite paragraph marL/indent per level using layout.body_indent
+  code_font: true          # replace pandoc's hardcoded Courier with font.mono + font.code_size
+  fix_math_images: true    # resize display-math images to their true physical size
+  clamp_math_to_slide: true # never let a math image overflow its box / the slide
+  math_image_prefix: "math-png-cache/"  # descr prefix that marks math images

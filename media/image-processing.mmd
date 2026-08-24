@@ -1,0 +1,11 @@
+graph LR
+    A[Start] --> B(Segment the image or use the segmented image from earlier acquisition);
+    B --> C(Scale the image to match the localization precision);
+    C --> D{Label each point: In or Out of domain?};
+    D --> E{For each trajectory: calculate % points 'In'};
+    E -- > 80% In --> F[Label trajectory as 'In'];
+    E -- < 20% In --> G[Label trajectory as 'Out'];
+    E -- 20%-80% In --> H[Label trajectory as 'Cross'];
+    F --> I(End);
+    G --> I;
+    H --> I;

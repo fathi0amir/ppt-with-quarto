@@ -1,0 +1,6 @@
+.freebuff/
+.venv/ 
+.vscode/
+__pycache__/
+backup/
+math-png-cache/
