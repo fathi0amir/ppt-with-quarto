@@ -1,6 +1,8 @@
 .freebuff/
-.venv/ 
+.venv/
 .vscode/
 __pycache__/
 backup/
 math-png-cache/
+
+/.luarc.json

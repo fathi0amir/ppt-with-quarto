@@ -1,6 +1,6 @@
 ---
 title: "Weekly Report"
-subtitle: "2026/08/24"
+subtitle: "2026/08/31"
 author: "Amir Fathi"
 
 format:
@@ -23,19 +23,13 @@ math-config:
 ## Highlights
 
 - Highlights of this week:
-  - Laser induced peptide fibrillation experiment with fs-laser
-  - iSCAT-Confocal colocalization for 25% BMP with DOPE-Biotin and DOPE-Cy5.
-    I have finished measurement for two samples. 
-    However, in my samples in the LSCM images I wasn't able to find any domain formation. 
-    I could track GNPs in these two samples though, and I will analyze the data next week.
-    - testing the indentation 
-  - More single molecule emission investigation
-  - Investigating the source of vibration in the iSCAT system
-  - Better LSCM-iSCAT image calibration
+  - Fix the hot-spot issue in the confocal system for 640 nm excitation. 
+  - New method to suppress interference fringes by Z Stacking
+  - Background correction for SLB
+  - Further investigating the source of vibration in the iSCAT system
 - Next: 
   - Do SPT with iSCAT for BMP 50% + TAT with higher concentration
-  - Analyze the iSCAT data
-  - Test the idea with fringe suppression with z axes modulation
+  - Experiment with the idea of fringe suppression with z Stacking
   - As *in* domains show more confinement, find a way to quantify the confinement using gyration tensor, 
   ergodicity analysis, transient confinement analysis, and other metrics
   - Do more experiments for phase separation
@@ -45,88 +39,92 @@ math-config:
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## Laser Induced Peptide Fibrillation Experiment
+## Hot Spot Isue in the Confocal System
 
-I used fs-laser at its maximum power to induce peptide fibrillation. I tried 
-to scan a small ROI or even a single point for maximum of 4 minutes. We tried to 
-at the substrate and buffer interface, in the bulk buffer and at the buffer-air interface. 
-We didn't observe new TAT nucleation or fibrillation in all three cases. 
-Furthermore, we have also tried two different TAT concentration (low and high). I am doing some 
-literature search to see if I can find some criteria for the experimental 
-parameters, such laser power, exposure time, TAT concentration and focusing position to 
-induce initiate nucleation, droplets or fibrillation. 
+The was problem when trying to image the sample with the 640 nm (Cy5) excitation. 
+There was a strong signal in the center which is not scanned and probably a back reflection 
+from a surface in the system. The issue is fixed now. 
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\hot-spot-sample.png)
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## iSCAT Noise Source
+## Hot spot Issue in Confocal System
 
-I have recorded the vibration with the iSCAT system (PhotonFocus camera) to compare 
-with the recording with my phone of beam visible vibrations. There is a clear 
-20 Hz frequency in the image. I did try to find the source but so far I was not 
-able to find where the 20 Hz frequency is coming from. I have some new ideas that 
-I will try next week to find the source of the vibration.
+There was an issue with the dichroic mirror in the confocal system that caused a hot spot in the image for 640 nm excitation. I just change to another dichroic mirror and the hot spot issue is fixed. Now I can 
+get a clean image for iSCAT-LSCM colocalization.
 
-
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\iscat-vibration.png)
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\hot-spot-line.png)
 
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## LSCM-iSCAT Image Calibration
+## iSCAT Vibration
 
-I cleaned a substrate and scratch it with a diamond tip. I dropped dilute solution of Cy5 
-where the dye molecules will stick to the scratches. Furthermore, I then imaged the sample with confocal and iSCAT.
-I then used the scratches as fiducial markers to calibrate the confocal image with the iSCAT image. 
-I can see the emission from the Cy5 molecules in the LSCM image and the scattering from the scratches in the iSCAT image.
-The images are higher correlated and with slight adjustment on steering mirror to the iSCAT camera, 
-I can find the position that matched the one in LSCM image. 
+I still cannot fully diagnose the vibration. I tried to check other equipments 
+on table 4 by turning them on and off, but the vibration is still there.
+If I can identify the source and mitigate it, it will be a significant improvement in the iSCAT system.
+For now, I will focus on the doing experiments and keep this in the back of head to see if I can find the source of the vibration.
 
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\lscm-iscat-calib.png)
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## Single / Aggregate Emitter Multistep Photobleaching Analysis
-
-::: {.columns}
-
-::: {.column width="65%"}
-
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\multistep-analysis.png)
-
-:::
-
-::: {.column width="35%"}
-
-I have analyzed another two samples to check for the multistep photobleaching. 
-There are some tracks that show multistep photobleaching but typically compare to the 
-number of tracks there are only less than 4% of the tracks that show multistep photobleaching.
-This indicates that the majority of the tracks are from single emitters. Left: 25% BMP with TAT-R - 2026-07-08
-Right: 50% BMP with TAT 2026-06-10. 
-
-:::
-
-:::
-
-<!-- *╭──────────────────────────────────────────────────────────────╮ -->
-<!-- *│ Slide                                                        │ -->
-<!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## Single Molecule Emitter Validation
+## iSCAT Fringe Suppression by Z Stacking
 
 ::: {.columns}
 
 ::: {.column width="50%"}
 
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.24 (Amir Fathi - Single Emitter, iSAT Noise, GNPs on BMP SLB)\step-histogram.png)
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\iscat-z-stacking.png)
 
 :::
 
+::: {.column width="50%"}
+
+During the experiment, I found that the interference fringes in the iSCAT image can be suppressed when 
+I am fine-tuning the focus manually. Just to roughly demonstrate the effect, I start the 
+acquisition and keep fine-tuning the focus. Then, offline, I average those frames. The frame range 
+is highlighted on each image. One idea could be using a piezo stage in open loop to modulate 
+the focus within the exposure time. The data will be inherently averaged on the image sensor 
+at pixel level. This can even be implemented with TAG lens which can run at tens of kHz for 
+high speed imaging. I have also added a video in my report to show the effect of fringe suppression by Z stacking.
+
+:::
+
+:::
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## iSCAT Fringe Suppression by Z Stacking
+
+I have also plotted the profile of the fringes for the averaged image and the original image. The fringes are suppressed by Z stacking.
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\z-stacking-profile.png)
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## SLB Background Correction
+
+::: {.columns}
 
 ::: {.column width="50%"}
 
-The histogram of the photobleaching step distribution for the same two samples. 
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\slb-bg-correction.png)
+
+:::
+
+::: {.column width="50%"}
+
+I can clean the background for the SLB images. There three steps involved. 
+First correct for lateral shift, then correcting for flat field, finally temporal rolling
+background correction. Although, I can significantly correct the background, still 
+the iscat profile is challenging for tracking. One path forward is using a custom 
+detector in TrackPy not default one which is for a Gaussian profile. 
 
 :::
 
@@ -161,24 +159,22 @@ The histogram of the photobleaching step distribution for the same two samples.
 ## Meeting Summary
 
 ### Paul
-- The time dependent for SLB with 25% BMP for 0.5, 1, 2, and 4 hours after TAT addition was repeated. 
-- TAT variant with 7+ positive charges was also tested and will be analyzed and reported next week.
+- New batch of TAT affinity experiments for 50% and 25% BMP with low and high concentration of TAT peptides. 
+The measurement is done, and the data will be analyzed.
 
 ### Tony 
-- …
+- Tony finshed measuring domain coverage for different TAT homologues, TAT (BMP 50% - 25%), 
+TAT-B (BMP 50%), TAT-R (BMP 50%), TAT-7+ (BMP 50%). TAT-7+ also shows present of domains which 
+in contract with lower charge TAT homologues. The data will be analyzed and reported accordingly.
 
 ### Peggy
-- Consistent staining (close to 100%) for the LNPs was confirmed. 
-- Size exclusion experiment was also repeated with consistent results for G1 and G5. 
+- Western blot experiment is not conclusive. The amount of protein will be increased, and the experiment will be repeated. Additionally, Peggy will use a new method to assess the endosome scape efficiency using the 
+flow cytometry data. 
 
 ### Andrew
-- There are some inconsistencies in the temperature dependent data. In one area when
-rising the temperature from room temperature to 50°C the domain disappears and 
-doesn't reappear when cooling down to room temperature. In another area, the domain (observed at RT) disappears at 50°C 
-but another domain appears. And when cooling down to RT the domain at 50°C disappears and another new 
-domain appears. 
-- Tracking this data set has only few successful tracks. New dataset is being measured and will be 
-analyzed.
+- He can now use my script to analyze the SPT data. He can try to compare it with the previous analysis and see if there is any difference. The new data shows the temperature effect doesn't affect the 
+domain explicitly, which could be an indication that the domain are not phase separation in nature. 
+Next, he will reproduce TAT experiment with different charges and compare in domain size and coverage.
 
 <!-- ### Daniel
 - I have discussed the experiment with Daniel to use fs-laser to induce peptide elongation which will 

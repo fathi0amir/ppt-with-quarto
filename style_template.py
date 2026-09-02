@@ -408,11 +408,6 @@ def style_placeholder_defaults(sp, ph_type, cfg, kind):
             etree.SubElement(spcAft, qn("a:spcPts")).set(
                 "val", str(int(float(layout["space_after"]) * 100))
             )
-            # bullet indent
-            if layout.get("body_indent") is not None:
-                indent_emu = emu_from_inches(layout["body_indent"])
-                pPr.set("marL", str(indent_emu))
-                pPr.set("indent", str(-indent_emu))
 
 
 def apply_text_defaults(prs, cfg):
@@ -864,8 +859,9 @@ def patch_deck(cfg, deck_path):
                     for paragraph in text_frame.paragraphs:
                         pPr = paragraph._p.get_or_add_pPr()
                         lvl = int(pPr.get("lvl") or 0)
-                        pPr.set("marL", str(indent_emu * (lvl + 1)))
-                        pPr.set("indent", str(-indent_emu))
+                        if lvl >= 1:
+                            pPr.set("marL", str(indent_emu * (lvl + 1)))
+                            pPr.set("indent", str(-indent_emu))
 
                 if patch["code_font"]:
                     for paragraph in text_frame.paragraphs:
