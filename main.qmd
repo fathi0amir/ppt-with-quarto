@@ -1,6 +1,6 @@
 ---
 title: "Weekly Report"
-subtitle: "2026/08/31"
+subtitle: "2026/09/14"
 author: "Amir Fathi"
 
 format:
@@ -23,11 +23,11 @@ math-config:
 ## Highlights
 
 - Highlights of this week:
-  - Fix the hot-spot issue in the confocal system for 640 nm excitation. 
-  - New method to suppress interference fringes by Z Stacking
-  - Background correction for SLB
-  - Further investigating the source of vibration in the iSCAT system
+  - Measured new SLBs with 50% BMP and TAT at 0.5 µM 500 FPS
+  - FFT filtering Pipeline
 - Next: 
+  - Process the new GNPs SPT data with the new pipline
+  - Follow up withe fs-laser chiller problem
   - Do SPT with iSCAT for BMP 50% + TAT with higher concentration
   - Experiment with the idea of fringe suppression with z Stacking
   - As *in* domains show more confinement, find a way to quantify the confinement using gyration tensor, 
@@ -39,96 +39,81 @@ math-config:
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## Hot Spot Isue in the Confocal System
+## Background Correction Pipeline
 
-The was problem when trying to image the sample with the 640 nm (Cy5) excitation. 
-There was a strong signal in the center which is not scanned and probably a back reflection 
-from a surface in the system. The issue is fixed now. 
+I have developed a pipeline to correct the background in iSCAT images. 
+This will be the first steps in preparing the images for SPT. The pipeline includes:
+1. Spatial filtering to remove the background by a large Gaussian kernel.
+2. Temporal filtering to remove the slow variation of the background frame to frame.
 
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\hot-spot-sample.png)
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.14 (Amir Fathi - SLB 500 FPS Recording, FFT Filtering)\bg-remove-pipeline.png)
 
-<!-- *╭──────────────────────────────────────────────────────────────╮ -->
-<!-- *│ Slide                                                        │ -->
-<!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## Hot spot Issue in Confocal System
-
-There was an issue with the dichroic mirror in the confocal system that caused a hot spot in the image for 640 nm excitation. I just change to another dichroic mirror and the hot spot issue is fixed. Now I can 
-get a clean image for iSCAT-LSCM colocalization.
-
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\hot-spot-line.png)
 
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## iSCAT Vibration
+## iSCAT image prepration for SPT
 
-I still cannot fully diagnose the vibration. I tried to check other equipments 
-on table 4 by turning them on and off, but the vibration is still there.
-If I can identify the source and mitigate it, it will be a significant improvement in the iSCAT system.
-For now, I will focus on the doing experiments and keep this in the back of head to see if I can find the source of the vibration.
+To track the GNPs in iSCAT without synchronized beam scanning, it is crucial 
+to prepare the images before tracking. Three different filtering methods are used to prepare the images for tracking:
+1. Spatial filtering to remove by a large Gaussian kernel to remove the background.
+2. Temporal filtering to remove the slow variation of the background frame to frame.
+3. FFT filtering to remove the fringes and other artifacts in the image at certain spatial frequencies.
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.07 (Amir Fathi - Failed SLB, FFT Filtering)\fft-filtering.png)
+
 
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## iSCAT Fringe Suppression by Z Stacking
+## FFT Frequency Selection 
 
-::: {.columns}
+:::{.columns}
 
 ::: {.column width="50%"}
 
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\iscat-z-stacking.png)
-
-:::
-
-::: {.column width="50%"}
-
-During the experiment, I found that the interference fringes in the iSCAT image can be suppressed when 
-I am fine-tuning the focus manually. Just to roughly demonstrate the effect, I start the 
-acquisition and keep fine-tuning the focus. Then, offline, I average those frames. The frame range 
-is highlighted on each image. One idea could be using a piezo stage in open loop to modulate 
-the focus within the exposure time. The data will be inherently averaged on the image sensor 
-at pixel level. This can even be implemented with TAG lens which can run at tens of kHz for 
-high speed imaging. I have also added a video in my report to show the effect of fringe suppression by Z stacking.
-
-:::
-
-:::
-
-<!-- *╭──────────────────────────────────────────────────────────────╮ -->
-<!-- *│ Slide                                                        │ -->
-<!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## iSCAT Fringe Suppression by Z Stacking
-
-I have also plotted the profile of the fringes for the averaged image and the original image. The fringes are suppressed by Z stacking.
-
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\z-stacking-profile.png)
-
-<!-- *╭──────────────────────────────────────────────────────────────╮ -->
-<!-- *│ Slide                                                        │ -->
-<!-- *╰──────────────────────────────────────────────────────────────╯ -->
-## SLB Background Correction
-
-::: {.columns}
-
-::: {.column width="50%"}
-
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.08.31 (Amir Fathi - Fix LSCM, Z-Stacking)\slb-bg-correction.png)
+I have developed several filters for toroidal notch or toroidal pass-band, radial low-pass, and radial high-pass filters. 
+I first visualize the FFT of the image and draw the desired frequency range to select the frequencies to be filtered. The radius can be used in the toroidal or radial filters in the image processing pipeline. I am 
+still tweaking and tuning the parameters to find a good set of parameters for the filters. The FFT filtering 
+should be consistent over the frames and ease the tracking of the GNPs in the iSCAT images. 
 
 :::
 
 ::: {.column width="50%"}
 
-I can clean the background for the SLB images. There three steps involved. 
-First correct for lateral shift, then correcting for flat field, finally temporal rolling
-background correction. Although, I can significantly correct the background, still 
-the iscat profile is challenging for tracking. One path forward is using a custom 
-detector in TrackPy not default one which is for a Gaussian profile. 
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.14 (Amir Fathi - SLB 500 FPS Recording, FFT Filtering)\fft-circles.png) 
 
 :::
 
 :::
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Toroidal Filter
+
+I have shown here some results for different radius sets for the toroidal filter.
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.14 (Amir Fathi - SLB 500 FPS Recording, FFT Filtering)\toroidal-filter.png)
+
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+## Radial and Custom ROI Filter
+
+I have also developed radial and custom ROI filters for the image processing pipeline.
+The custom ROI filter is useful for patterns that are not circular or toroidal. I have 
+shown a typical use case where the custom ROI filter is used to remove horizontal and vertical fringes
+
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.14 (Amir Fathi - SLB 500 FPS Recording, FFT Filtering)\low-high-custom-filter.png)
+
+<!-- *╭──────────────────────────────────────────────────────────────╮ -->
+<!-- *│ Slide                                                        │ -->
+<!-- *╰──────────────────────────────────────────────────────────────╯ -->
+
 
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
@@ -159,22 +144,26 @@ detector in TrackPy not default one which is for a Gaussian profile.
 ## Meeting Summary
 
 ### Paul
-- New batch of TAT affinity experiments for 50% and 25% BMP with low and high concentration of TAT peptides. 
-The measurement is done, and the data will be analyzed.
+- Paul repeated the TAT affinity experiment and the data analysis is ongoing. 
+- He is also working on to improve his python script to address the large population of 
+trajectories with α very close to zero.
+- Additionally, he found an issue where the fitting results did not consider the missed frames during tracking. He is working on a solution to address this issue.
+- We also discussed the short-lived τ values (20-50 ms) being very close to the frame duration (20 ms) and how to address this issue. One solution is to fit the data in two steps for the two time constants.
 
 ### Tony 
-- Tony finshed measuring domain coverage for different TAT homologues, TAT (BMP 50% - 25%), 
-TAT-B (BMP 50%), TAT-R (BMP 50%), TAT-7+ (BMP 50%). TAT-7+ also shows present of domains which 
-in contract with lower charge TAT homologues. The data will be analyzed and reported accordingly.
+- Tony finished measuring and analysis of TAT-B and TAT-R with domain coverage around 1%.
+- He also measures domains dynamics over time (for two hours) and will be reported after analyzing the data.
 
 ### Peggy
-- Western blot experiment is not conclusive. The amount of protein will be increased, and the experiment will be repeated. Additionally, Peggy will use a new method to assess the endosome scape efficiency using the 
-flow cytometry data. 
+- Peggy developed the assay to mark the LNPs and the proteins and quantify the coronation with flow cytometry.
+There is a cross-talk between the two fluorophore markers due to energy transfer. Maybe this can be 
+addressed by some experimental calibration for low to high coronation strategy before comparing the 
+two LNP groups. 
 
 ### Andrew
-- He can now use my script to analyze the SPT data. He can try to compare it with the previous analysis and see if there is any difference. The new data shows the temperature effect doesn't affect the 
-domain explicitly, which could be an indication that the domain are not phase separation in nature. 
-Next, he will reproduce TAT experiment with different charges and compare in domain size and coverage.
+- Andrew repeated the experiment with TAT-6+ with Atto488-DOPE and Bodipy-DOPC markers. In 
+both cases, in contrast to earlier experiments from Paul and Tony, the TAT-6+ shows domain formation.
+
 
 <!-- ### Daniel
 - I have discussed the experiment with Daniel to use fs-laser to induce peptide elongation which will 
