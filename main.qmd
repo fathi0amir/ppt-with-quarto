@@ -143,24 +143,28 @@ shown a typical use case where the custom ROI filter is used to remove horizonta
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
 ## Meeting Summary
 
-### Paul
+**Paul**
+
 - Paul repeated the TAT affinity experiment and the data analysis is ongoing. 
 - He is also working on to improve his python script to address the large population of 
 trajectories with α very close to zero.
 - Additionally, he found an issue where the fitting results did not consider the missed frames during tracking. He is working on a solution to address this issue.
 - We also discussed the short-lived τ values (20-50 ms) being very close to the frame duration (20 ms) and how to address this issue. One solution is to fit the data in two steps for the two time constants.
 
-### Tony 
+**Tony**
+
 - Tony finished measuring and analysis of TAT-B and TAT-R with domain coverage around 1%.
 - He also measures domains dynamics over time (for two hours) and will be reported after analyzing the data.
 
-### Peggy
+**Peggy**
+
 - Peggy developed the assay to mark the LNPs and the proteins and quantify the coronation with flow cytometry.
 There is a cross-talk between the two fluorophore markers due to energy transfer. Maybe this can be 
 addressed by some experimental calibration for low to high coronation strategy before comparing the 
 two LNP groups. 
 
-### Andrew
+**Andrew**
+
 - Andrew repeated the experiment with TAT-6+ with Atto488-DOPE and Bodipy-DOPC markers. In 
 both cases, in contrast to earlier experiments from Paul and Tony, the TAT-6+ shows domain formation.
 

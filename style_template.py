@@ -116,6 +116,7 @@ DEFAULTS = {
         "line_spacing": 1.0,
         "space_after": 4.0,
         "body_indent": 0.37,
+        "bullet_gap": 0.20,
         "footer_bottom_margin": 1.5,
         "content_gap": 1.0,
         "caption_ratio": 0.28,
@@ -828,6 +829,22 @@ def _svg_length_to_emu(length):
     return int(round(inches * EMU_PER_INCH))
 
 
+def _is_list_item(pPr):
+    """Return True if a paragraph properties element indicates a list item.
+
+    In Pandoc-generated PPTX, list-item paragraphs (at any level) have pPr
+    with only attributes (lvl, marL, indent) and zero child elements — the
+    bullet style is inherited from the slide layout's list definition.
+    Plain-text and heading paragraphs carry an explicit <a:buNone/> child,
+    added either by Pandoc or inherited from the template's lstStyle.
+    """
+    if pPr is None:
+        return False
+    # Any child element (buNone, buChar, buAutoNum, defRPr, …) means this
+    # paragraph has explicit formatting — it is NOT a bare list item.
+    return len(pPr) == 0
+
+
 def patch_deck(cfg, deck_path):
     """Post-process a rendered PPTX: text autofit, insets, code font,
     paragraph indents, and true-size math images."""
@@ -837,6 +854,7 @@ def patch_deck(cfg, deck_path):
     patch = cfg["patch"]
     insets = cfg["layout"]["insets"]
     indent_emu = emu_from_inches(cfg["layout"]["body_indent"]) if patch["normalize_indents"] else None
+    gap_emu = emu_from_inches(cfg["layout"].get("bullet_gap", 0.20)) if patch["normalize_indents"] else None
     code_font = cfg["font"]["mono"]
     code_size = cfg["font"]["code_size"]
 
@@ -858,10 +876,10 @@ def patch_deck(cfg, deck_path):
                 if patch["normalize_indents"]:
                     for paragraph in text_frame.paragraphs:
                         pPr = paragraph._p.get_or_add_pPr()
-                        lvl = int(pPr.get("lvl") or 0)
-                        if lvl >= 1:
+                        if _is_list_item(pPr):
+                            lvl = int(pPr.get("lvl") or 0)
                             pPr.set("marL", str(indent_emu * (lvl + 1)))
-                            pPr.set("indent", str(-indent_emu))
+                            pPr.set("indent", str(-gap_emu))
 
                 if patch["code_font"]:
                     for paragraph in text_frame.paragraphs:

@@ -59,7 +59,8 @@ layout:
     bottom: 0.05
   line_spacing: 1.0         # multiplier for body paragraphs
   space_after: 4            # pt after body paragraphs
-  body_indent: 0.37         # inches; bullet indent for body paragraphs
+  body_indent: 0.37         # inches; left margin per nesting level
+  bullet_gap: 0.2           # inches; gap between bullet marker and text (hanging indent)
   footer_bottom_margin: 1.5 # % of slide height: distance of footer row from bottom edge
   content_gap: 1.0          # % of slide height: gap between body content and footer row
   caption_ratio: 0.28       # Content with Caption layout: fraction of body height for caption
