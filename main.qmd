@@ -30,21 +30,24 @@ math-config:
   - Follow up withe fs-laser chiller problem
   - Do SPT with iSCAT for BMP 50% + TAT with higher concentration
   - Experiment with the idea of fringe suppression with z Stacking
-  - As *in* domains show more confinement, find a way to quantify the confinement using gyration tensor, 
-  ergodicity analysis, transient confinement analysis, and other metrics
+  - As *in* domains show more confinement, find a way to quantify the
+  confinement using gyration tensor, ergodicity analysis, transient confinement
+  analysis, and other metrics
   - Do more experiments for phase separation
   - Find a way to calibrate confocal image with the iSCAT image
-  - More simulation for the random phase mask to find the optimal parameters for the diffuser
+  - More simulation for the random phase mask to find the optimal parameters for
+    the diffuser
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
 <!-- *│ Slide                                                        │ -->
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
 ## Background Correction Pipeline
 
-I have developed a pipeline to correct the background in iSCAT images. 
-This will be the first steps in preparing the images for SPT. The pipeline includes:
+I have developed a pipeline to correct the background in iSCAT images. This will
+be the first steps in preparing the images for SPT. The pipeline includes:
 1. Spatial filtering to remove the background by a large Gaussian kernel.
-2. Temporal filtering to remove the slow variation of the background frame to frame.
+2. Temporal filtering to remove the slow variation of the background frame to
+   frame.
 
 ![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.14 (Amir Fathi - SLB 500 FPS Recording, FFT Filtering)\bg-remove-pipeline.png)
 
@@ -55,11 +58,15 @@ This will be the first steps in preparing the images for SPT. The pipeline inclu
 <!-- *╰──────────────────────────────────────────────────────────────╯ -->
 ## iSCAT image prepration for SPT
 
-To track the GNPs in iSCAT without synchronized beam scanning, it is crucial 
-to prepare the images before tracking. Three different filtering methods are used to prepare the images for tracking:
-1. Spatial filtering to remove by a large Gaussian kernel to remove the background.
-2. Temporal filtering to remove the slow variation of the background frame to frame.
-3. FFT filtering to remove the fringes and other artifacts in the image at certain spatial frequencies.
+To track the GNPs in iSCAT without synchronized beam scanning, it is crucial to
+prepare the images before tracking. Three different filtering methods are used
+to prepare the images for tracking:
+1. Spatial filtering to remove by a large Gaussian kernel to remove the
+   background.
+2. Temporal filtering to remove the slow variation of the background frame to
+   frame.
+3. FFT filtering to remove the fringes and other artifacts in the image at
+   certain spatial frequencies.
 
 ![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.07 (Amir Fathi - Failed SLB, FFT Filtering)\fft-filtering.png)
 
@@ -74,10 +81,13 @@ to prepare the images before tracking. Three different filtering methods are use
 
 ::: {.column width="50%"}
 
-I have developed several filters for toroidal notch or toroidal pass-band, radial low-pass, and radial high-pass filters. 
-I first visualize the FFT of the image and draw the desired frequency range to select the frequencies to be filtered. The radius can be used in the toroidal or radial filters in the image processing pipeline. I am 
-still tweaking and tuning the parameters to find a good set of parameters for the filters. The FFT filtering 
-should be consistent over the frames and ease the tracking of the GNPs in the iSCAT images. 
+I have developed several filters for toroidal notch or toroidal pass-band,
+radial low-pass, and radial high-pass filters. I first visualize the FFT of the
+image and draw the desired frequency range to select the frequencies to be
+filtered. The radius can be used in the toroidal or radial filters in the image
+processing pipeline. I am still tweaking and tuning the parameters to find a
+good set of parameters for the filters. The FFT filtering should be consistent
+over the frames and ease the tracking of the GNPs in the iSCAT images. 
 
 :::
 
@@ -96,7 +106,8 @@ should be consistent over the frames and ease the tracking of the GNPs in the iS
 
 I have shown here some results for different radius sets for the toroidal filter.
 
-![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.14 (Amir Fathi - SLB 500 FPS Recording, FFT Filtering)\toroidal-filter.png)
+![](F:\Amir\OneDrive_Research\Research\Ian Liau\Weekly Reports\2026\2026.09.14
+(Amir Fathi - SLB 500 FPS Recording, FFT Filtering)\toroidal-filter.png)
 
 
 <!-- *╭──────────────────────────────────────────────────────────────╮ -->
@@ -146,10 +157,14 @@ shown a typical use case where the custom ROI filter is used to remove horizonta
 **Paul**
 
 - Paul repeated the TAT affinity experiment and the data analysis is ongoing. 
-- He is also working on to improve his python script to address the large population of 
-trajectories with α very close to zero.
-- Additionally, he found an issue where the fitting results did not consider the missed frames during tracking. He is working on a solution to address this issue.
-- We also discussed the short-lived τ values (20-50 ms) being very close to the frame duration (20 ms) and how to address this issue. One solution is to fit the data in two steps for the two time constants.
+- He is also working on to improve his python script to address the large
+population of trajectories with α very close to zero.
+- Additionally, he found an issue where the fitting results did not consider the
+  missed frames during tracking. He is working on a solution to address this
+  issue.
+- We also discussed the short-lived τ values (20-50 ms) being very close to the
+  frame duration (20 ms) and how to address this issue. One solution is to fit
+  the data in two steps for the two time constants.
 
 **Tony**
 
