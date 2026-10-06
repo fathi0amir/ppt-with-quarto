@@ -1,32 +1,76 @@
 ---
 config:
-  layout: elk
+  theme: base
+  look: classic
+  layout: dagre
+  htmlLabels: false
+  themeVariables:
+    fontFamily: "Noto Sans"
+    fontSize: "20px"
+    primaryColor: "#E8F0FE"
+    primaryTextColor: "#1F2937"
+    primaryBorderColor: "#4F83CC"
+    secondaryColor: "#FFF4E5"
+    secondaryBorderColor: "#E0A95B"
+    secondaryTextColor: "#1F2937"
+    tertiaryColor: "#F3F4F6"
+    tertiaryBorderColor: "#9CA3AF"
+    tertiaryTextColor: "#1F2937"
+    mainBkg: "#E8F0FE"
+    secondBkg: "#FFF4E5"
+    nodeBorder: "#4F83CC"
+    nodeTextColor: "#1F2937"
+    textColor: "#1F2937"
+    clusterBkg: "#F8FAFC"
+    clusterBorder: "#94A3B8"
+    edgeLabelBackground: "#FFFFFF"
+    titleColor: "#27111b"
+    lineColor: "#6B7280"
+    arrowheadColor: "#6B7280"
+  themeCSS: |
+    .marker { fill: #6B7280; stroke: #6B7280; }
+    .edgePaths path { stroke-width: 4px; }
   flowchart:
+    htmlLabels: false
     curve: basis
-id: eaba3547-fcc5-4595-ae35-a54633b18ec6
+    padding: 6
+    nodeSpacing: 100
+    rankSpacing: 50
+    diagramPadding: 20
 ---
+
 flowchart LR
-    subgraph prep [Preprocessing]
+    A["Load raw iScat image sequence"] --> B["Background Removal"]
+
+    subgraph B["Background Removal"]
         direction TB
-        A0@{ shape: start, label: "" } --> A["Fit MSD"] --> B["Plot the D/ɑ distribution"]
+        B1["Remove uneven spatial background<br/>(per-frame)"]
+        B2["Remove temporal background<br/>(intensity fluctuations)"]
+        B1 --> B2
     end
 
-    subgraph analysis [Distribution analysis]
+    B --> C["Prepare Image for Tracking"]
+
+    subgraph C["Prepare Image for Tracking"]
         direction TB
-        C{"Is the distribution distinctly bimodal?"}
-        C -- Yes --> D["Threshold"]
-        C -- No --> E["Fit with two Gaussians and score"]
+        C1["Remove horizontal/vertical linear pattern<br/>(FFT)"]
+        C2["Remove high-frequency spatial noise<br/>(radial low-pass FFT filter)"]
+        C3["Remove circular interference fringes<br/>(toroidal notch FFT filter)"]
+        C4["Enhance particle signal<br/>(RVT filter)"]
+        C5{"Parameters optimized<br/>for all filters?"}
+        C6["Batch process all frames"]
+        C1 --> C2 --> C3 --> C4 --> C5
+        C5 -- "No, tune parameters" --> C1
+        C5 -- "Yes" --> C6
     end
 
-    subgraph raster [Rasterization and output]
+    C --> D["Tracking with trackpy"]
+
+    subgraph D["Tracking with trackpy"]
         direction TB
-        G["Count the points that fall in a pixel"]
-        H["Sum the score of each point in a pixel"]
-        G --> J["Map color to intensity"]
-        H --> J
-        J --> K["Threshold the rasterized image"]
-        K --> L["End"]
+        D1["Configure tracking parameters<br/>on cropped single-frame image"]
+        D2["Track all particles<br/>across all frames"]
+        D1 --> D2
     end
 
-    prep --> analysis --> raster
-    L@{ shape: summary, label: "" }
+    D --> E["Tracking results ready<br/>for MSD analysis"]
